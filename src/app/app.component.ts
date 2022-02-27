@@ -7,15 +7,5 @@ import { Product } from './models/product.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  imgParent = '';
-  showImg = true;
 
-
-  onLoaded(img: string) {
-    console.log('Parent log', img)
-  }
-
-  toggleImg() {
-    this.showImg = !this.showImg;
-  }
 }

@@ -11,7 +11,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   img: string = '';
   @Input('img') set changeImg(newImg: string) {
     this.img = newImg;
-    console.log('change just img');
+
   }
   @Input() alt: string = '';
   @Output() loaded = new EventEmitter<string>();
@@ -20,7 +20,7 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
 
 
   constructor() {
-    console.log('COnstructor', 'imgValue => ', this.img);
+
   }
 
   imgError() {
@@ -28,26 +28,25 @@ export class ImgComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy
   }
 
   imgLoaded() {
-    console.log('img loaded');
+
     this.loaded.emit(this.img)
   }
 
   ngOnChanges(chages: SimpleChanges): void {
-    console.log('ngOnChanges', 'imgValue => ', this.img);
-    console.log('changes', chages);
+
   }
 
   ngOnInit(): void {
-    console.log('ngOnInit', 'imgValue => ', this.img);
+
 
   }
 
   ngAfterViewInit(): void {
-    console.log('ngAfterInit', 'imgValue => ', this.img);
+
   }
 
   ngOnDestroy(): void {
-    console.log('onDestroy');
+
 
   }
 
