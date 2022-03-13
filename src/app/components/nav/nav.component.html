@@ -6,9 +6,12 @@
         <a href="">
             <img src="../../../assets/svg/logo_yard_sale.svg" alt="logo">
         </a>
-        <a href="">
+        <div class="cart">
+          <a href="">
             <img src="../../../assets/svg/icon_shopping_cart.svg" alt="card">
         </a>
+        <span class="counter">{{counter}}</span>
+        </div>
     </div>
     <div class="side-menu" [class.active]="activeSideMenu">
         <button (click)="toggleMenu()">Close</button>
@@ -37,6 +40,7 @@
             <div>
                 <a href="">
                     <img src="../../../assets/svg/icon_shopping_cart.svg" alt="card">
+                    <span class="counter">{{counter}}</span>
                 </a>
             </div>
         </div>
