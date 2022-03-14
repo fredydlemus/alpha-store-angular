@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../../models/product.model';
+import { Product, CreateProductDTO, UpdateProductDTO } from '../../models/product.model';
 import { StoreService } from 'src/app/services/store.service';
 import { ProductsService } from 'src/app/services/products.service';
 
@@ -53,6 +53,32 @@ export class ProductsComponent implements OnInit {
     this.productsService.getProduct(id).subscribe(data => {
       this.toggleProductDetail();
       this.productChosen = data;
+    });
+  }
+
+  createNewProduct(){
+    const product: CreateProductDTO = {
+
+      price: 10,
+      images: [`https://placeimg.com/640/480/any?random=${Math.random()}`],
+      title: 'New product',
+      description: 'This is a new product',
+      categoryId: 2
+    }
+    this.productsService.create(product).subscribe(data =>{
+
+      this.products.unshift(data);
+    });
+  }
+
+  updateProduct(){
+    const changes : UpdateProductDTO = {
+      title: 'Change title',
+    }
+    const id = this.productChosen.id;
+    this.productsService.update(id, changes).subscribe(data =>{
+      const productIndex = this.products.findIndex(item => item.id === this.productChosen.id);
+      this.products[productIndex] = data;
     });
   }
 }

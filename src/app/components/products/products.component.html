@@ -1,4 +1,4 @@
-
+<button (click)="createNewProduct()">Create</button>
 <div class="products--grid">
     <app-product
       (addToCart)="addToCart($event)"
@@ -21,6 +21,7 @@
 
     </swiper>
    <p>{{productChosen.description}}</p>
+   <button (click)="updateProduct()">edit</button>
   </div>
 </div>
 
