@@ -5,18 +5,3 @@
     margin-top: 20px;
 }
 
-.product-detail{
-  position: fixed;
-  top: 0;
-  left: 50%;
-  bottom: 0;
-  right: 0;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  transition: all ease-out 0.5s;
-  transform: translateX(100%);
-  &.active{
-    transform: translateX(0);
-  }
-}
