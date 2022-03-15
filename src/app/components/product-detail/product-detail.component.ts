@@ -20,6 +20,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
   @Input() showProductDetail: boolean = false;
+  @Input() statusDetail: string = 'init';
   @Output() closeProductDetail = new EventEmitter();
   @Output() editProduct = new EventEmitter();
   @Output() deleteProductEvent = new EventEmitter();

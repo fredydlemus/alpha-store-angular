@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model';
-import { retry} from 'rxjs';
+import { catchError, retry, throwError} from 'rxjs';
 import {environment} from './../../environments/environment';
 
 @Injectable({
@@ -9,7 +9,7 @@ import {environment} from './../../environments/environment';
 })
 export class ProductsService {
 
-  private apiUrl = `${environment.API_URL}/api/products'`;
+  private apiUrl = `${environment.API_URL}/api/products`;
 
   constructor(private http: HttpClient) { }
 
@@ -30,7 +30,21 @@ export class ProductsService {
 
 
   getProduct(id: string){
-    return this.http.get<Product>(`${this.apiUrl}/${id}`);
+    return this.http.get<Product>(`${this.apiUrl}/${id}`)
+    .pipe(
+      catchError((error: HttpErrorResponse )=> {
+        if (error.status === HttpStatusCode.Conflict){
+          return throwError('Server error');
+        }
+        if(error.status === HttpStatusCode.NotFound){
+          return throwError('Not found');
+        }
+        if(error.status === HttpStatusCode.Unauthorized){
+          return throwError('Unauthorized');
+        }
+        return throwError('Ups something went wrong');
+      })
+    );
   }
 
   create(dto: CreateProductDTO){
