@@ -13,6 +13,8 @@ export class AppComponent {
     private usersService: UsersService
   ) { }
 
+  token = '';
+
   createUser(){
     this.usersService.create({
       name: 'Fredy',
@@ -28,6 +30,14 @@ export class AppComponent {
     this.authService.login('fredy@mail.com', '1204')
     .subscribe(rta =>{
       console.log(rta.access_token);
+      this.token = rta.access_token;
+    })
+  }
+
+  getProfile(){
+    this.authService.profile(this.token)
+    .subscribe(profile =>{
+      console.log(profile);
     })
   }
 }
