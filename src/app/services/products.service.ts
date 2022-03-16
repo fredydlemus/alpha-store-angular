@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
 import { Product, CreateProductDTO, UpdateProductDTO } from '../models/product.model';
-import { catchError, retry, throwError, map} from 'rxjs';
+import { catchError, retry, throwError, map, zip} from 'rxjs';
 import {environment} from './../../environments/environment';
 
 @Injectable({
@@ -33,7 +33,13 @@ export class ProductsService {
     );
   }
 
+  fetchReadAndUpdate(id: string, dto: UpdateProductDTO){
+    return zip(
+      this.getProduct(id),
+      this.update(id, dto)
+    )
 
+  }
 
   getProduct(id: string){
     return this.http.get<Product>(`${this.apiUrl}/${id}`)
