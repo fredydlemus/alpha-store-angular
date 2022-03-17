@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
 
   activeSideMenu: boolean = false;
   counter = 0;
-  token = '';
+
   profile: User | null = null;
 
   constructor(
@@ -32,20 +32,20 @@ export class NavComponent implements OnInit {
   }
 
   login(){
-    //switchApp pending
-    this.authService.login('fredy@mail.com', '1204')
-    .subscribe(rta =>{
-      console.log(rta)
-      this.token = rta.access_token;
-      this.getProfile();
+    // //switchApp pending
+    // this.authService.login('fredy@mail.com', '1204')
+    // .subscribe(rta =>{
+    //   console.log(rta)
+    //   this.token = rta.access_token;
+    //   this.getProfile();
+    // });
+    this.authService.loginAndGet('fredy@mail.com', '1204')
+    .subscribe(user =>{
+      this.profile = user;
+
     });
   }
 
-  getProfile(){
-    this.authService.profile(this.token)
-    .subscribe(user =>{
-      this.profile = user;
-    });
-  }
+
 
 }
